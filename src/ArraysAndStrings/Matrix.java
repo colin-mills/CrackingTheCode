@@ -1,5 +1,6 @@
 /*
-1.7 + 1.8
+1.7 Rotate Matrix
+1.8 Zero Matrix
 pg. 91
  */
 
