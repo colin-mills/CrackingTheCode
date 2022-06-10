@@ -1,5 +1,7 @@
 //1.6 StringCompression
 //Pg. 91
+//TC: O(n)
+//SC: O(n) //if we count output in space complexity
 package ArraysAndStrings;
 import java.util.HashMap;
 
