@@ -1,9 +1,17 @@
+/*
+1.7 + 1.8
+pg. 91
+ */
+
 package ArraysAndStrings;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Matrix {
+
+    //TC: O(n) //we might have to touch every element
+    //SC: O(n^1/2) //our arrays could have n^1/2 elements if every row or column has a zero
     public static void zeroMatrix(int[][] box) {
         List<Integer> rows = new ArrayList<> ();
         List<Integer> cols = new ArrayList<> ();
@@ -30,6 +38,8 @@ public class Matrix {
         }
     }
 
+    //TC: O(n) -- we will touch every element or almost every
+    //SC: O(1)
     public static void rotateMatrix(int[][] box) {
         int layer = 0;
         if (box == null || box.length < 2) return; //early exit
