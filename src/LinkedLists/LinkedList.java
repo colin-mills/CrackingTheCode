@@ -64,6 +64,26 @@ public class LinkedList {
     TC: O(n)
     SC: O(1)
      */
+    public static void RemoveMiddleNode(Node head, Node rem) {
+        //can't be the middle node if these conditions aren't met
+        if (head == rem || head == null || head.next == null) return;
+
+        while (head != null && head.next != rem) head = head.next;
+
+        //If not found or is the tail
+        if (head == null || head.next == null) return;
+
+        removeNext(head);
+    }
+
+    //Overridden function for if we are not given head
+    public static void RemoveMiddleNode(Node rem) {
+        //this won't work if it is the last node
+        if (rem == null || rem.next == null) return;
+        rem.val = rem.next.val;
+        removeNext(rem);
+    }
+
     private static void removeNext(Node prev) {
         if (prev == null || prev.next == null) return;
 
