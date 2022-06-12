@@ -5,7 +5,7 @@ import java.util.HashSet;
 public class LinkedList {
 
     // Definition for singly-linked list as inner class.
-    private class Node {
+    private static class Node {
         int val;
         Node next;
         Node() {}
@@ -82,6 +82,37 @@ public class LinkedList {
         if (rem == null || rem.next == null) return;
         rem.val = rem.next.val;
         removeNext(rem);
+    }
+
+    public static Node[] partition(Node head, int p) {
+        if (head == null) return null;
+
+        //Create dummy sentinel nodes and add to partitionSet
+        Node leftHead = new Node(-1);
+        Node rightHead = new Node(-1);
+        Node[] partitionSet = new Node[] {leftHead, rightHead};
+
+        //if just one element
+        if (head.next == null) {
+            if (head.val < p) leftHead.next = head;
+            else rightHead.next = head;
+
+            return partitionSet;
+        }
+        Node ptr = head, leftPtr = leftHead, rightPtr = rightHead;
+
+        while (ptr != null) {
+            if (ptr.val < p) {
+                leftPtr.next = ptr;
+                leftPtr = leftPtr.next;
+            } else {
+                rightPtr.next = ptr;
+                rightPtr = rightPtr.next;
+            }
+            ptr = ptr.next;
+        }
+        leftPtr.next = rightPtr.next = null;
+        return partitionSet;
     }
 
     private static void removeNext(Node prev) {
