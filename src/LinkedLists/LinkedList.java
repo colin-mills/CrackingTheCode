@@ -58,6 +58,12 @@ public class LinkedList {
         return slow;
     }
 
+    /*
+    2.3 Delete Middle Node
+    Pg. 94
+    TC: O(n)
+    SC: O(1)
+     */
     private static void removeNext(Node prev) {
         if (prev == null || prev.next == null) return;
 
