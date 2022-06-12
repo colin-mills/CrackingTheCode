@@ -84,6 +84,12 @@ public class LinkedList {
         removeNext(rem);
     }
 
+    /*
+    2.4 Partition
+    Pg. 94
+    TC: O(n)
+    SC: O(1)
+     */
     public static Node[] partition(Node head, int p) {
         if (head == null) return null;
 
