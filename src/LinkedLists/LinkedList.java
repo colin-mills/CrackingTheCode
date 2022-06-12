@@ -13,10 +13,12 @@ public class LinkedList {
         Node(int val) { this.val = val; }
     }
 
-    //2.1 Remove Dups
-    //pg. 94
-    //TC: O(n)
-    //SC: O(1)
+    /*
+    2.1 Remove Dups
+    pg. 94
+    TC: O(n)
+    SC: O(1)
+     */
     public static Node removeDups(Node head) {
         //early exit / edge cases
         if (head == null || head.next == null) return head;
@@ -31,6 +33,29 @@ public class LinkedList {
             }
         }
         return head;
+    }
+
+    /*
+    2.2 Return kth to last
+    Pg. 94
+    TC: O(n)
+    SC: O(1)
+     */
+    public static Node returnKthToEnd(Node head, int k) {
+        if (head == null) return head;
+        Node slow = head, fast = head;
+        //We are defining k = 0 as the last element
+        while (fast != null && fast.next != null && k > 0) {
+            fast = fast.next;
+            k--;
+        }
+        if (k != 0) return null; //if we don't have enough elements
+
+        while (fast != null) {
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
     }
 
     private static void removeNext(Node prev) {
