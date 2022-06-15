@@ -99,7 +99,7 @@ public class ArrayTripleStack {
             newMeta[i].size = metadata[i].size;
             while (!metadata[i].isEmpty()) {
                 //copy over old values
-                newStack[metadata[i].startIndex + metadata[i].size -1] = metadata[i].getTopIndex();
+                newStack[newMeta[i].startIndex + metadata[i].size -1] = metadata[i].getTopIndex();
                 metadata[i].size--;
             }
         }
