@@ -1,5 +1,9 @@
 package StacksAndQueues;
 
+/*
+3.1 Three in one
+pg. 98
+ */
 public class ArrayTripleStack {
 
     //Stack Variables
