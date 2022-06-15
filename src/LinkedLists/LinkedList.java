@@ -204,6 +204,28 @@ public class LinkedList {
         return true;
     }
 
+    /*
+    2.7 Intersection
+    Pg. 95
+    TC: O(A+B)
+    SC: O(A)
+    HashSet approach
+     */
+    public static Node getIntersection (Node a, Node b) {
+        HashSet<Node> set = new HashSet<>();
+
+        while (a != null) {
+            set.add(a);
+            a = a.next;
+        }
+
+        while (b != null) {
+            if (set.contains(b)) return b;
+            b = b.next;
+        }
+        return null;
+    }
+
     private static void removeNext(Node prev) {
         if (prev == null || prev.next == null) return;
 
