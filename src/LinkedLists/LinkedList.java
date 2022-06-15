@@ -121,6 +121,38 @@ public class LinkedList {
         return partitionSet;
     }
 
+    /*
+    2.5 Sum lists
+    Pg. 95
+    TC: O(a+b)
+    SC: O(1)
+    Iterative solution
+     */
+    public static Node sumLists(Node headOne, Node headTwo) {
+        long carry = 0, mult = 1, sum = 0;
+        Node headNew = new Node();
+        Node ptrNew = headNew;
+
+        while (headOne != null && headTwo != null) {
+            if (headOne != null) sum += headOne.val;
+            if (headTwo != null) sum += headTwo.val;
+            carry = sum >= 10 ? 1 : 0;
+            sum = sum * mult;
+            ptrNew.val += sum;
+            ptrNew.next = new Node((int) carry);
+            sum = 0;
+            mult *= 10;
+            ptrNew = ptrNew.next;
+        }
+        return headNew;
+    }
+
+    /*
+    2.5 Recursive approach
+     */
+    public static Node sumListsRecursive(Node headOne, Node headTwo) {
+
+    }
     private static void removeNext(Node prev) {
         if (prev == null || prev.next == null) return;
 
