@@ -129,7 +129,7 @@ public class LinkedList {
     Iterative solution
      */
     public static Node sumLists(Node headOne, Node headTwo) {
-        long carry = 0, mult = 1, sum = 0;
+        long carry = 0, sum = 0;
         Node headNew = new Node();
         Node ptrNew = headNew;
 
@@ -137,11 +137,9 @@ public class LinkedList {
             if (headOne != null) sum += headOne.val;
             if (headTwo != null) sum += headTwo.val;
             carry = sum >= 10 ? 1 : 0;
-            sum = sum * mult;
             ptrNew.val += sum;
             ptrNew.next = new Node((int) carry);
             sum = 0;
-            mult *= 10;
             ptrNew = ptrNew.next;
         }
         return headNew;
@@ -151,7 +149,26 @@ public class LinkedList {
     2.5 Recursive approach
      */
     public static Node sumListsRecursive(Node headOne, Node headTwo) {
+        //base case or end of recursion
+        if (headOne == null && headTwo == null) return null;
+        long sum = 0;
+        if (headOne != null) sum += headOne.val;
+        if (headTwo != null) sum += headTwo.val;
 
+        Node newList = new Node((int) sum);
+        newList.next = sumListsRecursive(headOne.next, headTwo.next, sum > 9 ? 1 : 0);
+        return newList;
+    }
+
+    public static Node sumListsRecursive(Node headOne, Node headTwo, int carry) {
+        //base case or end of recursion
+        if (headOne == null && headTwo == null) return null;
+        long sum = carry;
+        if (headOne != null) sum += headOne.val;
+        if (headTwo != null) sum += headTwo.val;
+
+        Node newList = new Node((int) sum);
+        newList.next = sumListsRecursive(headOne.next, headTwo.next, sum > 9 ? 1 : 0);
     }
     private static void removeNext(Node prev) {
         if (prev == null || prev.next == null) return;
