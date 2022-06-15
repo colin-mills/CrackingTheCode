@@ -34,10 +34,14 @@ public class ArrayTripleStack {
     }
 
     private void initializeStackInfo(int capacity) {
-        int extraSpace = capacity % 3, start = 0;
+        int extraSpace = capacity % 3, leftOvers, start = 0;
         this.metadata = new StackInfo[3];
 
-        for (int i = 0; )
+        for (int i = 0; i < 3; i++) {
+            leftOvers = extraSpace-- > 0 ? 1 : 0;
+            this.metadata[i] = new StackInfo(start, capacity/3 + leftOvers);
+            start += this.metadata[i].capacity;
+        }
     }
 
 }
