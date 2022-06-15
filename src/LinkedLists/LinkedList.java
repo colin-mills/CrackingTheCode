@@ -5,6 +5,10 @@ import java.util.Stack;
 
 public class LinkedList {
 
+    /*****************************
+     *       Inner classes       *
+     *****************************/
+
     // Definition for singly-linked list as inner class.
     private static class Node {
         int val;
@@ -13,6 +17,24 @@ public class LinkedList {
         Node(int val, Node next) { this.val = val; this.next = next; }
         Node(int val) { this.val = val; }
     }
+
+    private static class Result {
+        private Node lastNode;
+        private int length;
+
+        Result(Node last, int l) {
+            this.lastNode = last;
+            this.length = l;
+        }
+
+        public Node getLast() {return this.lastNode;}
+        public int getLength() {return this.length;}
+
+    }
+
+    /*****************************
+     *         Solutions         *
+     *****************************/
 
     /*
     2.1 Remove Dups
@@ -224,6 +246,61 @@ public class LinkedList {
             b = b.next;
         }
         return null;
+    }
+
+    /*
+    2.7 Intersection
+    Pg. 95
+    TC: O(A+B)
+    SC: O(1)
+    constant space approach
+     */
+    public static Node getIntersectionConstantSpace(Node a, Node b) {
+        Result resultA = traverseList(a);
+        Result resultB = traverseList(b);
+
+        //If they intersect they have to end on the same node
+        if (resultA.getLast() != resultB.getLast()) return null;
+
+        //If they intersect we find collision point by chopping off front of longer list
+        int headStart = Math.abs(resultB.getLength() - resultA.getLength());
+        if (resultA.getLength() < resultB.getLength()) for (int i = 0; i < headStart; i++) b = b.next;
+        else for (int i = 0; i < headStart; i++) a = a.next;
+
+        //and then traversing until they are the same
+        while (a != null && a != b) {
+            a = a.next;
+            b = b.next;
+        }
+        return a;
+    }
+
+    /*
+    2.8 Loop Detection
+    pg. 95
+    TC: O(n)
+    SC: O(n)
+    HashSet approach
+     */
+    public static Node detectLoop(Node head) {
+        HashSet<Node> set = new HashSet<>();
+        while (head != null && !set.contains(head)) {
+            set.add(head);
+            head = head.next;
+        }
+        return head;
+    }
+
+    /*****************************
+     *     Helper functions      *
+     *****************************/
+    private static Result traverseList(Node head) {
+        int count = 1;
+        while (head != null && head.next != null) {
+            count++;
+            head = head.next;
+        }
+        return new Result(head, count);
     }
 
     private static void removeNext(Node prev) {
