@@ -1,5 +1,7 @@
 package StacksAndQueues;
 
+import java.security.InvalidParameterException;
+
 /*
 3.1 Three in one
 pg. 98
@@ -27,6 +29,10 @@ public class ArrayTripleStack {
         public boolean isEmpty() {return size == 0;}
     }
 
+    /****************
+     * Constructors *
+     ***************/
+
     ArrayTripleStack() {
         this.stack = new int[27];
         initializeStackInfo(27);
@@ -46,6 +52,27 @@ public class ArrayTripleStack {
             this.metadata[i] = new StackInfo(start, capacity/3 + leftOvers);
             start += this.metadata[i].capacity;
         }
+    }
+
+    /*******************
+     *  Public Methods *
+     *******************/
+
+    public void push (int stackNum, int val) {
+        if (stackNum < 0 || stackNum > 3) throw new InvalidParameterException("Must be within 0-2");
+        if (this.metadata[stackNum].isFull()) expandStacks();
+        else if (metadata[stackNum].isEmpty()) stack[metadata[stackNum].startIndex] = val;
+        else {
+            metadata[stackNum].size++;
+            stack[metadata[stackNum].getTopIndex()] = val;
+        }
+    }
+
+    /*******************
+     * Private Methods *
+     *******************/
+    private void expandStacks() {
+
     }
 
 }
