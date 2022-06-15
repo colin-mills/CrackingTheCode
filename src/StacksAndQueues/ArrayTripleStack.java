@@ -8,11 +8,6 @@ import java.util.EmptyStackException;
 pg. 98
  */
 public class ArrayTripleStack {
-
-    //Stack Variables
-    int[] stack;
-    StackInfo[] metadata;
-
     //metadata about each stack
     private class StackInfo{
         int startIndex;
@@ -34,25 +29,20 @@ public class ArrayTripleStack {
      * Constructors *
      ***************/
 
+    //Stack Variables
+    int[] stack;
+    StackInfo[] metadata;
+
     ArrayTripleStack() {
         this.stack = new int[27];
-        initializeStackInfo(27);
+        this.metadata = new StackInfo[3];
+        initializeStackInfo(27, this.metadata);
     }
 
     ArrayTripleStack(int capacity) {
         this.stack = new int[capacity];
-        initializeStackInfo(capacity);
-    }
-
-    private void initializeStackInfo(int capacity) {
-        int extraSpace = capacity % 3, leftOvers, start = 0;
         this.metadata = new StackInfo[3];
-
-        for (int i = 0; i < 3; i++) {
-            leftOvers = extraSpace-- > 0 ? 1 : 0;
-            this.metadata[i] = new StackInfo(start, capacity/3 + leftOvers);
-            start += this.metadata[i].capacity;
-        }
+        initializeStackInfo(capacity, this.metadata);
     }
 
     /*******************
@@ -80,10 +70,39 @@ public class ArrayTripleStack {
         return stack[metadata[stackNum].getTopIndex()];
     }
 
+    public boolean isEmpty(int stackNum) {
+        if (stackNum < 0 || stackNum > 3) throw new InvalidParameterException("Must be within 0-2");
+        return metadata[stackNum].isEmpty();
+    }
+
     /*******************
      * Private Methods *
      *******************/
+    private void initializeStackInfo(int capacity, StackInfo[] meta) {
+        int extraSpace = capacity % 3, leftOvers, start = 0;
+        this.metadata = new StackInfo[3];
+
+        for (int i = 0; i < 3; i++) {
+            leftOvers = extraSpace-- > 0 ? 1 : 0;
+            this.metadata[i] = new StackInfo(start, capacity/3 + leftOvers);
+            start += this.metadata[i].capacity;
+        }
+    }
+
     private void expandStacks() {
+        int capacity = stack.length * 2;
+        int[] newStack = new int[capacity];
+        StackInfo[] newMeta = new StackInfo[3];
+        initializeStackInfo(capacity, newMeta);
+
+        for (int i = 2; i >= 0; i--) {
+            newMeta[i].size = metadata[i].size;
+            while (!metadata[i].isEmpty()) {
+                //copy over old values
+                newStack[metadata[i].startIndex + metadata[i].size -1] = metadata[i].getTopIndex();
+                metadata[i].size--;
+            }
+        }
 
     }
 
