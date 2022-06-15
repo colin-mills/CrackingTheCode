@@ -1,6 +1,7 @@
 package LinkedLists;
 
 import java.util.HashSet;
+import java.util.Stack;
 
 public class LinkedList {
 
@@ -169,7 +170,40 @@ public class LinkedList {
 
         Node newList = new Node((int) sum);
         newList.next = sumListsRecursive(headOne.next, headTwo.next, sum > 9 ? 1 : 0);
+        return newList;
     }
+
+    /*
+    2.6 Palindrome
+    Pg. 95
+    TC: O(n)
+    SC: O(n) // O(n/2) = O(n * 1/2) = O(n)
+     */
+    public static boolean isPalindrome(Node head) {
+        //if empty return false, if one value return true
+        if (head == null || head.next == null) return head != null;
+
+        Stack<Integer> reverse = new Stack<>();
+
+        Node slow = head, fast = head;
+
+        //If even fast will equal null
+        while (fast != null && fast.next != null) {
+            reverse.push(slow.val);
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        //if it is odd skip the middle
+        if (fast != null) slow = slow.next;
+
+        while (slow != null) {
+            if (slow.val != reverse.pop()) return false;
+            slow = slow.next;
+        }
+        return true;
+    }
+
     private static void removeNext(Node prev) {
         if (prev == null || prev.next == null) return;
 
