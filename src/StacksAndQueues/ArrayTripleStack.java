@@ -1,6 +1,7 @@
 package StacksAndQueues;
 
 import java.security.InvalidParameterException;
+import java.util.EmptyStackException;
 
 /*
 3.1 Three in one
@@ -57,8 +58,7 @@ public class ArrayTripleStack {
     /*******************
      *  Public Methods *
      *******************/
-
-    public void push (int stackNum, int val) {
+    public void push(int stackNum, int val) {
         if (stackNum < 0 || stackNum > 3) throw new InvalidParameterException("Must be within 0-2");
         if (this.metadata[stackNum].isFull()) expandStacks();
         else if (metadata[stackNum].isEmpty()) stack[metadata[stackNum].startIndex] = val;
@@ -66,6 +66,18 @@ public class ArrayTripleStack {
             metadata[stackNum].size++;
             stack[metadata[stackNum].getTopIndex()] = val;
         }
+    }
+
+    public int pop(int stackNum) {
+        int res = peek(stackNum);
+        metadata[stackNum].size--;
+        return res;
+    }
+
+    public int peek(int stackNum) {
+        if (stackNum < 0 || stackNum > 3) throw new InvalidParameterException("Must be within 0-2");
+        if (metadata[stackNum].isEmpty()) throw new EmptyStackException();
+        return stack[metadata[stackNum].getTopIndex()];
     }
 
     /*******************
