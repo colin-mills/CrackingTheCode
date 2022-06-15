@@ -291,6 +291,34 @@ public class LinkedList {
         return head;
     }
 
+    /*
+    2.8 Loop Detection
+    pg. 95
+    TC: O(n)
+    SC: O(1)
+    slow and fast runner approach
+     */
+    public static Node detectLoopWithRunner(Node head) {
+        Node slow = head, fast = head;
+
+        while (fast != null && fast.next != null && slow != fast) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        //no loop
+        if (fast == null || fast.next == null) return null;
+
+        //Otherwise, we put slow back at start and wait til they collide again
+        //walking them at the same speed
+        slow = head;
+        while (slow != head) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        return slow;
+    }
+
     /*****************************
      *     Helper functions      *
      *****************************/
