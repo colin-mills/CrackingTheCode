@@ -6,6 +6,7 @@ import java.util.EmptyStackException;
 /*
 3.1 Three in one
 pg. 98
+Create dynamically resizing triple stack using one array
  */
 public class ArrayTripleStack {
     //metadata about each stack
