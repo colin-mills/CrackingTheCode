@@ -1,5 +1,6 @@
 package StacksAndQueues;
 
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class MyQueue <T> {
@@ -12,4 +13,12 @@ public class MyQueue <T> {
         //when queue becomes empty
         stack.push(val);
     }
-}
+
+    public T peek() {
+        if (queue.isEmpty()) {
+            if (stack.isEmpty()) throw new EmptyStackException();
+            else refreshQueue();
+        }
+        return queue.peek();
+    }
+ }
