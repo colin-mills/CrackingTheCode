@@ -21,4 +21,16 @@ public class MyQueue <T> {
         }
         return queue.peek();
     }
+
+    public T pop() {
+        if (queue.isEmpty()) {
+            if (stack.isEmpty()) throw new EmptyStackException();
+            else refreshQueue();
+        }
+        return queue.peek();
+    }
+
+    private void refreshQueue() {
+        while (!stack.isEmpty()) queue.push(stack.pop());
+    }
  }
