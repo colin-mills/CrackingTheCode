@@ -13,5 +13,13 @@ public class StackOfPlates <T>  {
         this.maxHeight = maxHeight;
     }
 
+    public void push (T val) {
+        if (stacks.get(frontIndex).size() >= maxHeight) {
+            stacks.add(new Stack<>());
+            frontIndex++;
+        }
+        stacks.get(frontIndex).push(val);
+    }
+
 
 }
