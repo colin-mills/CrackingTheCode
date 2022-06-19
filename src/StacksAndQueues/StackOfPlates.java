@@ -5,6 +5,12 @@ import java.util.EmptyStackException;
 import java.util.List;
 import java.util.Stack;
 
+/*
+3.3 Stack of Plates
+pg. 99
+Create stack that behaves like normal from the front-end
+But can only have stacks of size maxHeight behind the scenes
+ */
 public class StackOfPlates <T>  {
     public List<Stack<T>> stacks = new ArrayList<>();
     public int maxHeight = 10;

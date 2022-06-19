@@ -3,6 +3,11 @@ package StacksAndQueues;
 import java.util.EmptyStackException;
 import java.util.Stack;
 
+/*
+3.4 Queue Via Stacks
+pg. 99
+Create a queue using two stacks
+ */
 public class MyQueue <T> {
     Stack<T> stack = new Stack<>();
     Stack<T> queue = new Stack<>();
