@@ -3,7 +3,7 @@ package StacksAndQueues;
 import java.util.Stack;
 
 /*
-3.4 Sort Stack
+3.5 Sort Stack
 pg. 99
 Sort a stack where the lower values are on top,
 with only using one additional stack
