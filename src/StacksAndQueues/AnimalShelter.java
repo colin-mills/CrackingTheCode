@@ -4,9 +4,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 /*
-3.1 Three in one
-pg. 98
-Create dynamically resizing triple stack using one array
+3.6 Animal Shelter
+pg. 99
+Create Queue for managing Cats and Dogs in an animal shelter
  */
 public class AnimalShelter {
     /*********************
