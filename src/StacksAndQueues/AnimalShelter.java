@@ -1,14 +1,20 @@
 package StacksAndQueues;
 
+import java.util.LinkedList;
+import java.util.List;
+
 public class AnimalShelter {
-    private class Animal {
-        String name = "name";
+    /*********************
+     * Private sub-classes
+     **********************/
+    private interface Animal {
+        String name = null;
     }
 
-    private class Dog extends Animal {}
-    private class Cat extends  Animal {}
+    private class Dog implements Animal {}
+    private class Cat implements   Animal {}
 
-    private class ShelterSpot {
+    private class ShelterSpot  {
         Animal adoptMe;
         int serialNum;
 
@@ -16,5 +22,34 @@ public class AnimalShelter {
             this.adoptMe = a;
             this.serialNum = serial;
         }
+    }
+
+    /***********************
+     * Class objects
+     **********************/
+    List<ShelterSpot> dogs = new LinkedList<>();
+    List<ShelterSpot> cats = new LinkedList<>();
+    int serialNumber = 0;
+
+    /***********************
+     * Class methods
+     **********************/
+    public void enqueue (Dog pup) { dogs.add(new ShelterSpot(pup, serialNumber++)); }
+
+    public void enqueue (Cat kit) { cats.add(new ShelterSpot(kit, serialNumber++)); }
+
+    public Animal dequeueDog() {
+        return dogs.remove(dogs.size() - 1).adoptMe;
+    }
+
+    public Animal dequeueCat() {
+        return cats.remove(dogs.size() - 1).adoptMe;
+    }
+
+    public Animal dequeueAny() {
+        if (dogs.get(dogs.size()-1).serialNum < cats.get(cats.size()-1).serialNum)
+            return dequeueDog();
+        else
+            return dequeueCat();
     }
 }
