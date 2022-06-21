@@ -3,6 +3,11 @@ package StacksAndQueues;
 import java.util.LinkedList;
 import java.util.List;
 
+/*
+3.1 Three in one
+pg. 98
+Create dynamically resizing triple stack using one array
+ */
 public class AnimalShelter {
     /*********************
      * Private sub-classes
@@ -39,15 +44,15 @@ public class AnimalShelter {
     public void enqueue (Cat kit) { cats.add(new ShelterSpot(kit, serialNumber++)); }
 
     public Animal dequeueDog() {
-        return dogs.remove(dogs.size() - 1).adoptMe;
+        return dogs.remove(0).adoptMe;
     }
 
     public Animal dequeueCat() {
-        return cats.remove(dogs.size() - 1).adoptMe;
+        return cats.remove(0).adoptMe;
     }
 
     public Animal dequeueAny() {
-        if (dogs.get(dogs.size()-1).serialNum < cats.get(cats.size()-1).serialNum)
+        if (dogs.get(0).serialNum < cats.get(0).serialNum)
             return dequeueDog();
         else
             return dequeueCat();
