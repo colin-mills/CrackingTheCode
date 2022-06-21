@@ -1,6 +1,5 @@
 package TreesAndGraphs;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 
@@ -8,7 +7,7 @@ public class Graph {
     /**********************
      * Private sub-classes
      **********************/
-    private class Node {
+    private static class Node {
         List<Node> neighbors;
 
         Node (List<Node> neighbors) {
@@ -24,13 +23,13 @@ public class Graph {
      */
     public boolean routeExists(Node a, Node b) {
         if (a == null || b == null) return false;
-        return isValidPath(a,b,new HashSet<Node>);
+        return isValidPath(a,b, new HashSet<>());
     }
 
     private boolean isValidPath(Node a, Node b, HashSet<Node> nodeHashSet) {
         if (a == null || nodeHashSet.contains(a)) return false;
         if (a == b) return true;
-        boolean foundPath = false;
+        boolean foundPath;
 
         for (Node next: a.neighbors) {
             foundPath = isValidPath(next,b,nodeHashSet);
