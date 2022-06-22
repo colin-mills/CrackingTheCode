@@ -70,4 +70,12 @@ public class Tree <T> {
         }
         return res;
     }
+
+    /*
+    4.4 Check Balanced
+    pg. 109
+    check if a tree is balanced, where unbalanced is defined as any subtree depth differing by more than 1
+    TC: O(n) //BCR because we have to touch every node
+    SC: O(1)
+     */
 }
