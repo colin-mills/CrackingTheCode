@@ -12,8 +12,10 @@ public class Tree <T> {
      **********************/
     private static class Node<T> {
         T val;
+        int value;
         Node left = null;
         Node right = null;
+        Node parent = null;
 
         Node (T val) {
             this.val = val;
@@ -109,5 +111,25 @@ public class Tree <T> {
         //pre-order since we evaluated the root first
         traverseTree(root.left, depth+1, minMax);
         traverseTree(root.right, depth+1,minMax);
+    }
+
+    /*
+    4.5 Validate BST
+    pg. 110
+    check if a tree is BST
+    TC: O(n)
+    SC: O(log(n)) //max recursive stack depth
+     */
+    public boolean isBST(Node root) {
+        if (root == null) return false;
+        return isBST(root, new int[] {Integer.MIN_VALUE});
+    }
+
+    private boolean isBST(Node root, int[] last) {
+        if (root == null) return true;
+        if (!isBST(root.left,last) || last[0] < root.value) return false;
+        //in-order traversal
+        last[0] = root.value;
+        return isBST(root.right, last);
     }
 }
