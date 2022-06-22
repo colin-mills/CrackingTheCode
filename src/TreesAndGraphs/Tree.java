@@ -37,4 +37,15 @@ public class Tree <T> {
         root.right = getNextNode(mid+1, h, arr);
         return root;
     }
+
+    /*
+    4.3 List of Depths
+    pg. 109
+    create a binary search tree with minimal height from sorted array
+    TC: O(n) //BCR because we have to touch every node
+    SC: O(n) // max height of recursive stack is log(n) but we return n values
+     */
+    public List<List<Node>> getDepthLists(Node root) {
+        if (root == null) return null;
+    }
 }
