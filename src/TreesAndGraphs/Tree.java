@@ -1,6 +1,9 @@
 package TreesAndGraphs;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class Tree <T> {
 
@@ -41,11 +44,30 @@ public class Tree <T> {
     /*
     4.3 List of Depths
     pg. 109
-    create a binary search tree with minimal height from sorted array
+    create a List of Lists, where each sublist is one layer of the tree
     TC: O(n) //BCR because we have to touch every node
     SC: O(n) // max height of recursive stack is log(n) but we return n values
      */
     public List<List<Node>> getDepthLists(Node root) {
         if (root == null) return null;
+
+        Queue<Node> queue = new LinkedList<>();
+        List<List<Node>> res = new ArrayList<>();
+        queue.offer(root);
+        Node current = null;
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            List<Node> list = new ArrayList<>();
+
+            for (int i=0; i<size; size++) {
+                current = queue.poll();
+                list.add(current);
+                if (current.left != null) queue.offer(current.left);
+                if (current.right != null) queue.offer(current.right);
+            }
+            res.add(list);
+        }
+        return res;
     }
 }
