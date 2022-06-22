@@ -92,6 +92,22 @@ public class Tree <T> {
         return minMax[1] - minMax[0];
     }
 
-    private void traverseTree(Node root, int i, int[] minMax) {
+    private void traverseTree(Node root, int depth, int[] minMax) {
+        if (root == null) {
+            //otherwise we will never initialize min
+            if (minMax[0] == -1) minMax[0] = depth;
+
+            //set new max or min
+            if (depth < minMax[0]) minMax[0] = depth;
+            else if (depth > minMax[1]) minMax[1] = depth;
+            return;
+        }
+        //early exit
+        if(minMax[0] != -1 && minMax[1] != -1 && getBalance(minMax) > 1) return;
+
+        //otherwise we traverse
+        //pre-order since we evaluated the root first
+        traverseTree(root.left, depth+1, minMax);
+        traverseTree(root.right, depth+1,minMax);
     }
 }
