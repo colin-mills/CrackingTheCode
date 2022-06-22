@@ -165,4 +165,21 @@ public class Tree <T> {
     TC: O(n)
     SC: O(log(n)) //max recursive stack depth
      */
+    public Node getNext(Node root) {
+        //base case
+        if (root == null) return null;
+
+        if (root.right != null) {
+            //case 1, there's a right branch
+            root = root.right;
+            while (root.left != null) root = root.left;
+        } else {
+            //case 2, return the parent of the last left branch
+            while (root.parent != null && root.parent.left != root) root = root.parent;
+            //now get the parent
+            root = root.parent;
+        }
+        return root;
+    }
+
 }
