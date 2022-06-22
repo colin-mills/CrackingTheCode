@@ -161,9 +161,10 @@ public class Tree <T> {
     /*
     4.6 Successor
     pg. 110
-    Get the next
-    TC: O(n)
-    SC: O(log(n)) //max recursive stack depth
+    Get the next node in a BST
+    TC: O(n) //worse case is last node, which must traverse up entire tree,
+        //since there is no guarantee the tree is balanced O(n)
+    SC: O(1)
      */
     public Node getNext(Node root) {
         //base case
