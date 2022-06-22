@@ -132,4 +132,37 @@ public class Tree <T> {
         last[0] = root.value;
         return isBST(root.right, last);
     }
+
+    //This is a bit cleaner approach to 4.5
+    //and lets us have duplicates
+    public boolean isBSTMinMaxMethod(Node root) {
+        if (root == null) return false;
+        return isBST(root, null, null);
+    }
+
+    private boolean isBST(Node root, Integer min, Integer max) {
+        if (root == null) return true;
+
+        //recurse down left path
+        if (!isBST(root.left, min, root.value)) return false;
+
+        //validate current node
+        //if min is initialized and is not greater than or equal to min (can be the same as min)
+        if (min != null && root.value < min) return false;
+        //if max is initialized and is not less than max
+        if (max != null && root.value >= max) return false;
+
+        //recurse down right path
+        if (!isBST(root.right, root.value, max)) return false;
+
+        //we passed the gauntlet
+        return true;
+    }
+    /*
+    4.6 Successor
+    pg. 110
+    Get the next
+    TC: O(n)
+    SC: O(log(n)) //max recursive stack depth
+     */
 }
