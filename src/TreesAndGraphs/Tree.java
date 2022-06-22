@@ -78,4 +78,20 @@ public class Tree <T> {
     TC: O(n) //BCR because we have to touch every node
     SC: O(1)
      */
+    public boolean isBalanced(Node root) {
+        //technically a null tree is balanced
+        //a null tree is defined to have a depth of -1, and is the only subtree
+        // so there cannot be a difference of more than 1
+        if (root == null) return true; //base case
+        int minMax[] = new int[] {-1,-1};
+        traverseTree(root,0,minMax);
+        return getBalance(minMax) < 2;
+    }
+
+    private int getBalance(int[] minMax) {
+        return minMax[1] - minMax[0];
+    }
+
+    private void traverseTree(Node root, int i, int[] minMax) {
+    }
 }
