@@ -24,13 +24,21 @@ public class GraphTopoSort {
             this.name = name;
         }
 
-        public String getName() { return name; }
-
         public void addNeighbor(Project node) {
             if (!map.containsKey(node.getName())) {
-
+                children.add(node);
+                map.put(node.getName(), node);
+                node.incrementDependencies();
             }
         }
+
+        public void incrementDependencies() { dependencies++; }
+        public void decrementDependencies() { dependencies--; }
+
+        public String getName() { return name; }
+        public ArrayList<Project> getChildren() { return children; }
+        public int getNumberDependencies() { return dependencies; }
+
     }
     private class graph {
         //list of vertices in the graph
