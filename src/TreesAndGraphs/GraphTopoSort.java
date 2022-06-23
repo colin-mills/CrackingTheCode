@@ -15,10 +15,21 @@ public class GraphTopoSort {
      * Private subclasses
      **********************/
     private class Project {
-        String name;
+        private String name;
+        private ArrayList<Project> children = new ArrayList<>();
+        private HashMap<String, Project> map = new HashMap<>();
+        private int dependencies = 0;
 
         Project(String name) {
             this.name = name;
+        }
+
+        public String getName() { return name; }
+
+        public void addNeighbor(Project node) {
+            if (!map.containsKey(node.getName())) {
+
+            }
         }
     }
     private class graph {
@@ -37,6 +48,12 @@ public class GraphTopoSort {
             return map.get(name);
         }
 
+        public void addEdge(String startName, String endName) {
+            Project start = getOrCreateNode(startName);
+            Project end = getOrCreateNode(endName);
+            start.addNeighbor(end);
+        }
 
+        public ArrayList<Project> getNodes() { return nodes; }
     }
 }
