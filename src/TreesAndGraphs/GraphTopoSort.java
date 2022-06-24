@@ -84,5 +84,17 @@ public class GraphTopoSort {
 
     private Project[] orderProjects(ArrayList<Project> projects) {
         Project[] order = new Project[projects.size()];
+
+        //add roots with no deps first
+        int endOfList = addNonDependent(order, projects, 0);
+    }
+
+    private int addNonDependent(Project[] order, ArrayList<Project> projects, int offset) {
+        for (Project prj : projects) {
+            if (prj.getNumberDependencies() == 0) {
+                order[offset] = prj;
+                offset++;
+            }
+        }
     }
 }
