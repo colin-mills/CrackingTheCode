@@ -40,7 +40,7 @@ public class GraphTopoSort {
         public int getNumberDependencies() { return dependencies; }
 
     }
-    private class graph {
+    private class Graph {
         //list of vertices in the graph
         private ArrayList<Project> nodes = new ArrayList<>();
         //hash map for constant time retrieval of nodes by name
@@ -63,5 +63,26 @@ public class GraphTopoSort {
         }
 
         public ArrayList<Project> getNodes() { return nodes; }
+    }
+
+    //main function
+    public Project[] findBuildOrder(String [] projects, String[][] dependencies) {
+        Graph graph = buildGraph(projects, dependencies);
+        return orderProjects(graph.getNodes());
+    }
+
+    private Graph buildGraph(String[] projects, String[][] dependencies) {
+        Graph graph = new Graph();
+
+        for (String[] dep : dependencies) {
+            String first = dep[0];
+            String second = dep[1];
+            graph.addEdge(first,second);
+        }
+        return graph;
+    }
+
+    private Project[] orderProjects(ArrayList<Project> projects) {
+        Project[] order = new Project[projects.size()];
     }
 }
