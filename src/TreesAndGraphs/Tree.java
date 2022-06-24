@@ -183,4 +183,46 @@ public class Tree <T> {
         return root;
     }
 
+    /*
+    4.8 Common Ancestor
+    pg. 110
+    Get the common ancestor of two nodes in a tree
+    TC: O(log(n)) //worse case is they both meet at root which would be 4 * log(n)
+        //technically it could be  O(n) since there is no guarantee the tree is balanced O(n)
+    SC: O(1)
+     */
+    public Node getCommonAncestor(Node one, Node two) {
+        if (one == null || two == null) return null;
+        Node current = one;
+        int depthOne = 0, depthTwo = 0;
+        //find the depth of one
+        while (one.parent != null) {
+            //early exit if we happen to run into two on the way up
+            if (current == two) return current;
+            current = current.parent;
+            depthOne++;
+        }
+        current = two;
+        while (two.parent != null) {
+            //early exit if we happen to run into one on the way up
+            //possible this didn't happen in the first loop if one is above 2
+            if (current == one) return current;
+            current = current.parent;
+            depthTwo++;
+        }
+
+        while (one != two && depthOne >= 0 && depthTwo >= 0) {
+            if (depthOne > depthTwo) {
+                one = one.parent;
+                depthOne--;
+            } else if (depthTwo > depthOne) {
+                two = two.parent;
+                depthTwo--;
+            } else {
+                one = one.parent;
+                two = two.parent;
+            }
+        }
+        return one;
+    }
 }
