@@ -87,6 +87,25 @@ public class GraphTopoSort {
 
         //add roots with no deps first
         int endOfList = addNonDependent(order, projects, 0);
+
+        int toBeProcessed = 0;
+        while (toBeProcessed < order.length) {
+            Project current = order[toBeProcessed];
+
+            //if no remaining processes with 0 deps bc of circular dependency
+            if (current == null) return null;
+
+            //remove self as dependency from children
+            ArrayList<Project> children = current.getChildren();
+            for (Project child : children) {
+                child.decrementDependencies();
+            }
+
+            //add new prjs with no deps
+            endOfList = addNonDependent(order, children, endOfList);
+            toBeProcessed++;
+        }
+        return order;
     }
 
     private int addNonDependent(Project[] order, ArrayList<Project> projects, int offset) {
@@ -96,5 +115,6 @@ public class GraphTopoSort {
                 offset++;
             }
         }
+        return offset;
     }
 }
