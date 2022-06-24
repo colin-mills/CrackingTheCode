@@ -225,4 +225,44 @@ public class Tree <T> {
         }
         return one;
     }
+
+    /*
+    4.9 BST Sequences
+    pg. 110
+    Get the possible arrays that could have built a given BST
+    TC: TBD
+    SC: TBD when I understand this problem more
+     */
+    public ArrayList<LinkedList<Integer>> allSequences(Node node) {
+        ArrayList<LinkedList<Integer>> result = new ArrayList<>();
+
+        if (node == null) {
+            //edge case null tree
+            result.add(new LinkedList<>());
+            return result;
+        }
+        LinkedList<Integer> prefix = new LinkedList<>();
+        prefix.add(node.value);
+
+        //recurse on left and right subtrees
+        ArrayList<LinkedList<Integer>> leftSeq = allSequences(node.left);
+        ArrayList<LinkedList<Integer>> rightSeq = allSequences(node.right);
+
+        //weave them together on the way up
+        for (LinkedList<Integer> left : leftSeq) {
+            for (LinkedList<Integer> right : rightSeq) {
+                ArrayList<LinkedList<Integer>> weaved = new ArrayList<>();
+                weaveLists(left,right,weaved,prefix);
+                result.addAll(weaved);
+            }
+        }
+        return result;
+    }
+
+    //weave the list together in all the possible ways
+    //This works by removing the head from one list, recursing, and then doing the same thing with the other list
+    void weaveLists(LinkedList<Integer> left, LinkedList<Integer> right,
+                    ArrayList<LinkedList<Integer>> results, LinkedList<Integer> prefix) {
+        //if one list is empty add the rest to a cloned prefix for a deep copy
+    }
 }
