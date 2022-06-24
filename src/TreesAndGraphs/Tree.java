@@ -261,8 +261,31 @@ public class Tree <T> {
 
     //weave the list together in all the possible ways
     //This works by removing the head from one list, recursing, and then doing the same thing with the other list
-    void weaveLists(LinkedList<Integer> left, LinkedList<Integer> right,
+    void weaveLists(LinkedList<Integer> first, LinkedList<Integer> second,
                     ArrayList<LinkedList<Integer>> results, LinkedList<Integer> prefix) {
         //if one list is empty add the rest to a cloned prefix for a deep copy
+        if (first.isEmpty() || second.isEmpty()) {
+            LinkedList<Integer> result = (LinkedList<Integer>) prefix.clone();
+            result.addAll(first);
+            result.addAll(second);
+            results.add(result);
+            return;
+        }
+
+        //recurse with head of first added to the prefix. Removing the head will damage the first,
+        //so we need to put it back when we are done
+        int headFirst = first.removeFirst();
+        prefix.add(headFirst);
+        weaveLists(first,second,results,prefix);
+        prefix.removeLast();
+        first.addFirst(headFirst);
+
+        //Do the same thing with the second
+        int headSecond = second.removeFirst();
+        prefix.add(headSecond);
+        weaveLists(first,second,results,prefix);
+        prefix.removeLast();
+        second.addFirst(headSecond);
+
     }
 }
