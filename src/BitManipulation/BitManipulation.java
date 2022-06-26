@@ -53,4 +53,12 @@ public class BitManipulation {
         }
         return "ERROR";
     }
+
+    /*
+    5.3 Flip bit to win
+    pg. 116
+    Find the longest streak of 1s in a binary representation by flipping any 1 bit
+    TC: O(1)
+    SC: O(1)
+     */
 }
