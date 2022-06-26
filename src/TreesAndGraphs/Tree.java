@@ -341,7 +341,7 @@ public class Tree <T> {
      */
     int size;
     HashMap<Integer, Node> map = new HashMap<>();
-    public Node getRandomConst(Node root) {
+    public Node getRandomConst() {
         Random rand = new Random();
         int chosenOne = rand.nextInt(this.size);
         return this.map.get(chosenOne);
@@ -353,5 +353,21 @@ public class Tree <T> {
     TC: O(log(n))
     SC: O(log(n)) | max recursive height
      */
+    public Node getRandomLog(Node root) {
+        //edge cases
+        if (root == null || root.left == null && root.right == null) return root;
+        Random rand = new Random();
+        int chosenOne = rand.nextInt(root.size);
+        return getRandomLog(root, chosenOne);
+    }
 
+    private Node getRandomLog(Node root, int chosenOne) {
+        //if it is in the left subtree
+        if (root.left != null && chosenOne < root.left.size) return getRandomLog(root.left, chosenOne);
+        //if it is the current root
+        else if (chosenOne == root.left.size + 1) return root;
+        //else it is in the right subtree
+        //we subtract all the nodes outside of this tree to adjust the index of what we are looking for
+        else return getRandomLog(root.right, chosenOne - (root.left.size + 1)); //else it is in the right subtree
+    }
 }
