@@ -82,4 +82,48 @@ public class BitManipulation {
         //one last check in case the 32nd number was a 1
         return Math.max(max, currentStreak + lastStreak + 1);
     }
+
+    /*
+    5.4 Next Number
+    pg. 116
+    Print the next largest and the next smallest number with the same number of 1 bits
+    TC: O(1)
+    SC: O(1)
+     */
+    public void printNextNumbers(int n) {
+        System.out.println(nextBiggestNum(n));
+        System.out.println(nextSmallestNum(n));
+    }
+
+    private int nextBiggestNum(int n) {
+        //compute c0 and c1
+        int c = n;
+        int c0 = 0;
+        int c1 = 0;
+
+        while (((c&1) == 0) && (c != 0)) {
+            //get trailing zeroes
+            c0++;
+            c >>= 1;
+        }
+
+        while ((c&1) == 1) {
+            //get 1s before first non-trailing zero
+            c1++;
+            c >>= 1;
+        }
+
+        //if value cannot be bigger (ie. 11100...00)
+        if (c0 + c1 == 31 || c0 + c1 == 0) return -1;
+
+        int p = c0 + c1; //position of rightmost trailing zero
+
+        n |= (1 << p); //flip p
+        n &= ~((1<<p) - 1); //clear bits to right of p
+        n |= (1 << (c1 - 1) - 1); //insert (c1-1) 1s to the right side
+        return n;
+    }
+
+    private int nextSmallestNum(int n) {
+    }
 }
