@@ -22,4 +22,10 @@ public class BitOperations {
         return n | (1 << i);
     }
 
+    public int clearBit(int n, int i) {
+        //creates mask which will be all 1s except a 0 at the ith position
+        int mask = ~(1 << i);
+        return n & mask;
+    }
+
 }
