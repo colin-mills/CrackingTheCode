@@ -61,4 +61,25 @@ public class BitManipulation {
     TC: O(1)
     SC: O(1)
      */
+    public int maxBitStreakWithFlip(int n) {
+        //edge case bc the algorithm will add 1 to 32 and return 33
+        if (n == Integer.MAX_VALUE) return 32;
+        //we can early exit if this is the case bc no ones
+        if (n == 0) return 1;
+
+        int max = 1, currentStreak = 0, lastStreak = 0;
+        while (n != 0) {
+            if ((n & 1) == 1) currentStreak++;
+            else {
+                //we hit a 0
+                //current max or the union of the last two streaks
+                max = Math.max(max, currentStreak + lastStreak + 1);
+                lastStreak = currentStreak;
+                currentStreak = 0;
+            }
+            n >>= 1;
+        }
+        //one last check in case the 32nd number was a 1
+        return Math.max(max, currentStreak + lastStreak + 1);
+    }
 }
