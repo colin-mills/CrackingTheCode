@@ -414,4 +414,34 @@ public class Tree <T> {
         //now take this one back off the path
         paths.removeLast();
     }
+
+    /*
+    4.12 Paths with sum
+    option 2: Use a HashMap to keep track of running sum then look backwards to see if there are any paths
+    TC: O(n) |
+    SC: O(log(n)) | if balanced, otherwise O(n)
+     */
+    public int countPathsWithSum(Node root, int targetSum) {
+        return countPathsWithSum(root, targetSum, 0, new HashMap<Integer,Integer>());
+    }
+
+    private int countPathsWithSum(Node root, int targetSum, int runningSum, HashMap<Integer,Integer> pathCount) {
+        if (root == null) return 0; //base case
+
+        //count paths with sum ending at current node
+        runningSum += root.value;
+        int sum = runningSum = targetSum;
+        int totalPaths = pathCount.getOrDefault(sum, 0);
+
+        //if running sum is equal to target sum, then that is another path
+        if (runningSum == targetSum) totalPaths++;
+
+        //add current node to map, recurse, then remove it
+        incrementHashMap(pathCount, runningSum, 1);
+        totalPaths += countPathsWithSum(root.left,targetSum,runningSum,pathCount);
+        totalPaths += countPathsWithSum(root.right,targetSum,runningSum,pathCount);
+        incrementHashMap(pathCount, runningSum, -1);
+
+        return totalPaths;
+    }
 }
