@@ -296,4 +296,10 @@ public class Tree <T> {
     TC: O(n + k*m) | where k is the number of matches to the root of T2 in T1
     SC: O(log(n) + log(m)) | max recursive stack if T2's root is a leaf node of T1, and it is a subtree
      */
+    public boolean isSubtree(Node t1, Node t2) {
+        if (t1 == t2 ) return true; //if they are the same tree
+        if (t1 == null) return false; //if just t1 is null then obvi not a subtree
+        if (t2 == null) return true; //if just t2 is null then it has to be a subtree
+        return isSubtreeSearch(t1, t2);
+    }
 }
