@@ -28,4 +28,9 @@ public class BitOperations {
         return n & mask;
     }
 
+    public int clearMSBtoI(int n, int i) {
+        //mask will be all 1s from 0 to i-1
+        int mask = (1 << i) - 1;
+        return n & mask;
+    }
 }
