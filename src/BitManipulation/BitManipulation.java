@@ -1,4 +1,6 @@
 package BitManipulation;
+//Basically all bit manipulation tricks with integers technically run in constant time,
+// since they are bounded by 32 bits
 
 public class BitManipulation {
     /*
@@ -162,5 +164,25 @@ public class BitManipulation {
         if (n == 0) return false;
         //it returns true if n is a pow of 2 or 0.. so we check for zero first
         return ((n & (n-1) )== 0);
+    }
+
+    /*
+    5.6 Conversion
+    pg. 116
+    get the number of bits that would have to be flipped to make a equal b
+    TC: O(1)
+    SC: O(1)
+     */
+    public int getBitsFlippedToConvert(int a, int b) {
+        return countBits(a ^ b);
+    }
+
+    private int countBits(int i) {
+        int numBits = 0;
+        while (i != 0) {
+            numBits += i & 1;
+            i >>>= 1;
+        }
+        return numBits;
     }
 }
