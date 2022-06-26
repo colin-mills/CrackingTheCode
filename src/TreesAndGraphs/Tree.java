@@ -19,6 +19,12 @@ public class Tree <T> {
             this.val = val;
         }
     }
+
+    private class MutableInt {
+        int val = 0;
+        public void increment() {val++;}
+        public void decrement() {val--;}
+    }
     /*
     4.2 Minimal Tree
     pg. 109
@@ -369,5 +375,20 @@ public class Tree <T> {
         //else it is in the right subtree
         //we subtract all the nodes outside of this tree to adjust the index of what we are looking for
         else return getRandomLog(root.right, chosenOne - (root.left.size + 1)); //else it is in the right subtree
+    }
+
+    /*
+    4.12 Paths with sum
+    pg. 111
+    Return all the contiguous downward paths that add up to a target sum
+    option 1: add paths to a queue as we recurse down tree, update and record any solutions that are found
+    TC: O(log(n)^2) | if balanced, otherwise O(n^2)
+    SC: O(log(n)^2) | if balanced, otherwise O(n^2)
+     */
+    public int getPathsWithSum(Node root, int target) {
+        if (root == null) return 0;
+        MutableInt res = new MutableInt();
+        getPathsWithSum(root, res, target, new LinkedList<Integer>());
+        return res;
     }
 }
