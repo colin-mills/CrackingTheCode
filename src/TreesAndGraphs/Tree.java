@@ -302,4 +302,19 @@ public class Tree <T> {
         if (t2 == null) return true; //if just t2 is null then it has to be a subtree
         return isSubtreeSearch(t1, t2);
     }
+
+    private boolean isSubtreeSearch(Node t1, Node t2) {
+        if (t1 == null) return false; //base case
+        if (t1 == t2) return true; //if T2 IS a node on T1 then they have to match
+        if (t1.value == t2.value) {
+            //if they match search the trees and return true
+            if (isCopyTree(t1,t2)) return true;
+        }
+        //otherwise we keep conducting our pre-order search
+        if (isSubtreeSearch(t1.left,t2)) return true;
+        if (isSubtreeSearch(t1.right,t2)) return true;
+
+        //if we didn't find any matches then we return false
+        return false;
+    }
 }
