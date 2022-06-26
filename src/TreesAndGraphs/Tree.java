@@ -317,4 +317,17 @@ public class Tree <T> {
         //if we didn't find any matches then we return false
         return false;
     }
+
+    private boolean isCopyTree(Node t1, Node t2) {
+        //base cases to end recursion
+        if (t1 == null && t2 == null ) return true;
+        if (t1 != t2) return false;
+        //otherwise they match and we keep searching
+        //if false is found we want to bubble that up right away
+        if (!isCopyTree(t1.left,t2.left)) return false;
+        if (!isCopyTree(t1.right,t2.right)) return false;
+
+        //if no falses, then it must be true
+        return true;
+    }
 }
