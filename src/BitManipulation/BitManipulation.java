@@ -185,4 +185,27 @@ public class BitManipulation {
         }
         return numBits;
     }
+
+    /*
+    5.7 Pairwise Swap
+    pg. 116
+    return the int where all even and odd bits are swapped
+    i.e. 0 and 1 are swapped, 2 and 3 are swapped, etc.
+    TC: O(1)
+    SC: O(1)
+     */
+    public int pairwiseSwap(int n) {
+        //create left mask with hex
+        //0xa equals 1010
+        int leftMask = 0xaaaaaaaa;
+        //create right mask with hex
+        //0x5 equals 0101
+        int rightMask = 0x55555555;
+
+        int leftBits = n & leftMask;
+        int rightBits = n & rightMask;
+
+        //shift the left bits right and the right bits left
+        return (leftBits >>> 1) | (rightBits << 1);
+    }
 }
