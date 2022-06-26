@@ -35,7 +35,15 @@ public class BitManipulation {
         charArr[0] = '.';
         double fraction = .5;
         for(int i=1; i < charArr.length; i++) {
+            if (real > fraction) {
+                real -= fraction;
+                charArr[i] = '1';
+                //exit if 0
+                if (real == 0) return new String(charArr);
+            } else charArr[i] = '0';
 
+            fraction /= 2;
         }
+        return "ERROR";
     }
 }
