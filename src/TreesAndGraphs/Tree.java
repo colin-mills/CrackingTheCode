@@ -347,5 +347,11 @@ public class Tree <T> {
         return this.map.get(chosenOne);
     }
 
+    /*
+    4.11 Random Node
+    option 2: get random node with O(log(n)) so long as the node knows the size of the tree it is root of
+    TC: O(log(n))
+    SC: O(log(n)) | max recursive height
+     */
 
 }
