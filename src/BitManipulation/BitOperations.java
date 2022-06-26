@@ -17,4 +17,9 @@ public class BitOperations {
         return (n & (1 << i)) != 0;
     }
 
+    public int setBit(int n, int i) {
+        //if it was a zero it will flip to a 1
+        return n | (1 << i);
+    }
+
 }
