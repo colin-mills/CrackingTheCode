@@ -444,4 +444,12 @@ public class Tree <T> {
 
         return totalPaths;
     }
+
+    private void incrementHashMap(HashMap<Integer, Integer> pathCount, int key, int delta) {
+        int newCount = pathCount.getOrDefault(key, 0) + delta;
+        if (newCount == 0) {
+            //remove when zero to reduce space
+            pathCount.remove(key);
+        } else pathCount.put(key, newCount);
+    }
 }
