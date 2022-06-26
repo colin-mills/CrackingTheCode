@@ -389,6 +389,29 @@ public class Tree <T> {
         if (root == null) return 0;
         MutableInt res = new MutableInt();
         getPathsWithSum(root, res, target, new LinkedList<Integer>());
-        return res;
+        return res.val;
+    }
+
+    private void getPathsWithSum(Node root, MutableInt res, int target, Deque<Integer> paths) {
+        if (root == null) return; //base case
+        //update and check all the existing paths
+        int size = paths.size();
+        for (int i=0; i < size; i++) {
+            int current = paths.poll() + root.value;
+            if (current == target) res.increment();
+            //because there can be negative values we need to add this path back
+            paths.offer(current);
+        }
+
+        //next,
+        //if this path of one == the target
+        if (root.value == target) res.increment();
+        //add this path in case it matches again
+        paths.offer(root.value);
+        //recurse
+        getPathsWithSum(root.left, res, target, paths);
+        getPathsWithSum(root.right, res, target, paths);
+        //now take this one back off the path
+        paths.removeLast();
     }
 }
