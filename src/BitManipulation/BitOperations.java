@@ -33,4 +33,14 @@ public class BitOperations {
         int mask = (1 << i) - 1;
         return n & mask;
     }
+
+    //basically we clear the bit, and then set it if value is 1
+    public int updateBit(int n, int i, boolean val) {
+        int value = val ? 1 : 0;
+        //shift value over to the ith position
+        value = (value << i);
+        //create mask to clear that bit
+        int mask = ~(1 << i);
+        return (n & mask) | value;
+    }
 }
