@@ -208,4 +208,13 @@ public class BitManipulation {
         //shift the left bits right and the right bits left
         return (leftBits >>> 1) | (rightBits << 1);
     }
+
+    /*
+    5.8 Draw Line
+    pg. 116
+    based off of a byte array representing a screen, draw a line from (x1,y) to (x2,y)
+    TC: O(w) | where w is the width of the screen in bytes
+    SC: O(1)
+     */
+
 }
