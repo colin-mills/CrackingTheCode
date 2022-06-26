@@ -123,5 +123,31 @@ public class BitManipulation {
     }
 
     private int nextSmallestNum(int n) {
+        int temp = n;
+        int c0 = 0;
+        int c1 = 0;
+
+        while ((temp & 1) == 1) {
+            //get trailing ones (we can't make any of these smaller
+            c1++;
+            temp >>=1;
+        }
+
+        if (temp == 0) return -1;
+
+        while ((temp &1) == 0 && (temp != 0)) {
+            //get zeroes until next 1
+            //we are guarenteed to have at least one 1 since we checked the number isn't zero
+            c0++;
+            temp >>= 1;
+        }
+
+        int p = c0 + c1; //position of rightmost non-trailing one
+        n &=  ((~0)) <<  (p + 1); //clears bits from p to LSB
+
+        int mask = (1 << (c1 + 1)) -1; //sequence of c1+1 ones
+        n |= mask << (c0 -1); //put the sequence as far left as possible
+
+        return n;
     }
 }
