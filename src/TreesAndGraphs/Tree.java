@@ -1,9 +1,6 @@
 package TreesAndGraphs;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree <T> {
 
@@ -13,6 +10,7 @@ public class Tree <T> {
     private static class Node<T> {
         T val;
         int value;
+        int size;
         Node left = null;
         Node right = null;
         Node parent = null;
@@ -330,4 +328,24 @@ public class Tree <T> {
         //if no falses, then it must be true
         return true;
     }
+
+    /*
+    4.11 Random Node
+    pg. 111
+    Return a truly random node from a tree
+    option 1: constant time, constant space approach with HashMap
+    #This requires the tree to have been built with a HashMap
+    #And swapping the greatest value with the deletion value on deletes so there aren't any gaps in the map
+    TC: O(1)
+    SC: O(n)
+     */
+    int size;
+    HashMap<Integer, Node> map = new HashMap<>();
+    public Node getRandomConst(Node root) {
+        Random rand = new Random();
+        int chosenOne = rand.nextInt(this.size);
+        return this.map.get(chosenOne);
+    }
+
+
 }
