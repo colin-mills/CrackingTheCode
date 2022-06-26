@@ -21,9 +21,7 @@ public class BitManipulation {
         //find out how big the mask should be
         int size = msb - lsb + 1;
         //make the mask
-        //example: 2^3 = 8 decimal, 1000
-        // 1000 - 1 = 0111 which is a 3 digit mask
-        int mask = (int) Math.pow(2, size) -1;
+        int mask = (1 << lsb) - 1;
         //shift the mask over the start at the LSB and not it so the values from LSB to MSB, inclusive are 0;
         mask = ~(mask << lsb);
         return n & mask;
