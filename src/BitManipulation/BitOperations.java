@@ -12,4 +12,9 @@ public class BitOperations {
     << - left shift
      */
 
+    public boolean getBit(int n, int i) {
+        //creates a bit at the ith location and then returns true if it is a 1
+        return (n & (1 << i)) != 0;
+    }
+
 }
