@@ -150,4 +150,17 @@ public class BitManipulation {
 
         return n;
     }
+
+    /*
+    5.5 Debugger
+    pg. 116
+    explain what ((n & (n-1) )== 0) does
+    TC: O(1)
+    SC: O(1)
+     */
+    public boolean isPowTwo(int n) {
+        if (n == 0) return false;
+        //it returns true if n is a pow of 2 or 0.. so we check for zero first
+        return ((n & (n-1) )== 0);
+    }
 }
