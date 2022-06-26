@@ -288,4 +288,12 @@ public class Tree <T> {
         second.addFirst(headSecond);
 
     }
+
+    /*
+    4.10 Check subtree
+    pg. 110
+    Determine if T2 is a subtree of T1
+    TC: O(n + k*m) | where k is the number of matches to the root of T2 in T1
+    SC: O(log(n) + log(m)) | max recursive stack if T2's root is a leaf node of T1, and it is a subtree
+     */
 }
