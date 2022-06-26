@@ -29,6 +29,13 @@ public class BitManipulation {
         return n & mask;
     }
 
+    /*
+    5.2 Binary to String
+    pg. 116
+    Convert a real number between 0-1 to a String in its decimal representation
+    TC: O(1)
+    SC: O(1)
+     */
     public String getFractionalBinaryAsString (double real) {
         if (real < 0 || real >= 1) return "ERROR";
         char[] charArr = new char[33];
