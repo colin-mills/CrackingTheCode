@@ -17,7 +17,7 @@ public class BitManipulation {
         return m | n;
     }
 
-    private int clearBits(int n, int lsb, int msb) {
+    public int clearBits(int n, int lsb, int msb) {
         //find out how big the mask should be
         int size = msb - lsb + 1;
         //make the mask
@@ -27,5 +27,15 @@ public class BitManipulation {
         //shift the mask over the start at the LSB and not it so the values from LSB to MSB, inclusive are 0;
         mask = ~(mask << lsb);
         return n & mask;
+    }
+
+    public String getFractionalBinaryAsString (double real) {
+        if (real < 0 || real >= 1) return "ERROR";
+        char[] charArr = new char[33];
+        charArr[0] = '.';
+        double fraction = .5;
+        for(int i=1; i < charArr.length; i++) {
+
+        }
     }
 }
