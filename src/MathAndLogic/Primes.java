@@ -19,4 +19,20 @@ public class Primes {
         }
         return flags;
     }
+
+    private static void crossOff(boolean[] flags, int prime) {
+        //cross off remaining multiples of prime
+        //we can start with prime * prime bc if we have a k * prime , where k < prime
+        //this value already would have been crossed up
+        for (int i = prime * prime; i < flags.length; i += prime) {
+            flags[i] = false;
+        }
+    }
+
+    private static int getNextPrime(boolean[] flags, int prime) {
+        int next = prime + 1;
+        while (next < flags.length && !flags[next]) next++;
+
+        return next;
+    }
 }
