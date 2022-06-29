@@ -1,5 +1,6 @@
 package RecursionAndDynamicProgramming;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DynamicProgramming {
@@ -117,5 +118,30 @@ public class DynamicProgramming {
         int right = magicFast(arr, rightIndex, h);
 
         return right;
+    }
+
+    /*
+    8.4 get Subsets
+    pg. 135
+    TC: O(2^n) | this is how many possible subsets there are so BCR
+    SC: O(2^n * n) | we will create 2^n solutions with a max recursive depth of n
+     */
+    public static List<List<Integer>> getSubsets(int[] arr) {
+        if (arr == null || arr.length == 0) return new ArrayList<>();
+        List<List<Integer>> res = new ArrayList<>();
+        getSubsets(0, arr, new ArrayList<Integer>(), res);
+        return res;
+    }
+
+    private static void getSubsets(int start, int[] arr, List<Integer> current, List<List<Integer>> res) {
+        if (start >= arr.length) return;
+        //deep copy
+        res.add(new ArrayList<>(current));
+        for (int i = start; i < arr.length; i++) {
+            current.add(arr[i]);
+            getSubsets(i,arr,current,res);
+            current.remove(current.size()-1);
+        }
+
     }
 }
