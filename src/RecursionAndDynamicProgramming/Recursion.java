@@ -88,4 +88,33 @@ public class Recursion {
             curr.remove(arr[i]);
         }
     }
+
+    /*
+    8.9 Parens
+    pg. 136
+    Get all the valid parenthesis for n sets
+    TC: O(2^n-1)
+    SC: O(2^n-1)
+     */
+    public ArrayList<String> getParens(int n) {
+        if (n==0) return new ArrayList<String>();
+        ArrayList<String> res = new ArrayList<>();
+        getParens(n,0,res,new StringBuilder());
+        return res;
+    }
+
+    private void getParens(int n, int balance, List<String> res, StringBuilder curr) {
+        if (balance < 0 && balance > n*2) return;
+        if (balance == 0 && curr.length() == n*2) {
+            res.add(curr.toString());
+            return;
+        }
+        char[] validOptions = new char[] {'(',')'};
+        for (char ch : validOptions) {
+            int weight = ch == '(' ? 1 : -1;
+            curr.append(ch);
+            getParens(n,balance + weight, res, curr);
+            curr.deleteCharAt(curr.length()-1);
+        }
+    }
 }
