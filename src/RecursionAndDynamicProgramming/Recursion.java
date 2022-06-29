@@ -125,5 +125,31 @@ public class Recursion {
     TC: technically constant since there is no variable n that is changing
     SC: technically constant since there is no variable n that is changing
      */
+    public ArrayList<Integer[]> eightQueens() {
+        ArrayList<Integer[]> res = new ArrayList<>();
+        placeQueens(0, new Integer[8], res);
+        return res;
+    }
 
+    private void placeQueens(int row, Integer[] columns, ArrayList<Integer[]> res) {
+        if (row == columns.length) {
+            res.add(columns.clone());
+            return;
+        }
+        for (int col = 0; col < columns.length; col++) {
+            if (isValid(columns,row,col)) {
+                columns[row] = col;
+                placeQueens(row + 1, columns, res);
+            }
+        }
+
+    }
+
+    private boolean isValid(Integer[] columns, int row, int col) {
+        for (int row2 =0; row2<row; row2++) {
+            int column2 = columns[row2];
+            //noq check if this can't work
+
+        }
+    }
 }
