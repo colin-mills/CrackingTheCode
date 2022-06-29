@@ -27,4 +27,13 @@ public class DynamicProgramming {
         }
         return d;
     }
+
+    /*
+    8.2 Robot in a grid
+    pg. 135
+    determine the number of ways a robot can reach the bottom right of a grid, either choosing to go down or right,
+    => there can be obstacles
+    TC: O(r * c) | where r = number of rows, c = number of columns
+    SC: O(r * c) | memo grid, can optimize to O(c) if you are clever with array mangaement
+     */
 }
