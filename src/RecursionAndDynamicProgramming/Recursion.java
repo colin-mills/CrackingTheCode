@@ -148,8 +148,17 @@ public class Recursion {
     private boolean isValid(Integer[] columns, int row, int col) {
         for (int row2 =0; row2<row; row2++) {
             int column2 = columns[row2];
-            //noq check if this can't work
+            //now check if this can't work
 
+            //if in same column
+            if (col == column2) return false;
+
+            //now check diagonals
+            int columnDistance = Math.abs(column2 = col);
+            int rowDistance = row - row2;
+
+            if (columnDistance == rowDistance) return false;
         }
+        return true;
     }
 }
