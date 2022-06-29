@@ -93,4 +93,29 @@ public class DynamicProgramming {
         //if not found
         return -1;
     }
+
+    /*
+    8.3 Magic Index with dupes
+    pg. 135
+    TC: O(n)
+    SC: O(n)
+     */
+    public int magicIndexDupes(int[] arr) {
+        return magicFast(arr, 0, arr.length-1);
+    }
+
+    private int magicFast(int[] arr, int l, int h) {
+        if (h > l) return -1;
+        int m = l + (h - l) / 2;
+        if (arr[m] == m) return m;
+
+        int leftIndex = Math.min(m - 1, arr[m]);
+        int left = magicFast(arr, l, leftIndex);
+        if (left >= 0) return left;
+
+        int rightIndex = Math.max(m + 1, arr[m]);
+        int right = magicFast(arr, rightIndex, h);
+
+        return right;
+    }
 }
