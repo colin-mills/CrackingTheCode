@@ -74,4 +74,23 @@ public class DynamicProgramming {
 
         for (int[] coord : offLimits) board[coord[0]][coord[1]] = -1;
     }
+
+    /*
+    8.3 Magic Index
+    pg. 135
+    return the index that matches the value at the index (magic index) or -1 if DNE in sorted array
+    TC: O(log(n)) | basically just binary search
+    SC: O(1)
+     */
+    public int magicIndex(int [] arr) {
+        int l=0, h=arr.length-1, m;
+        while (l <= h) {
+            m = l + (h-l)/2;
+            if (arr[m] == m) return m;
+            else if (arr[m] > m) h = m - 1;
+            else l = m + 1;
+        }
+        //if not found
+        return -1;
+    }
 }
