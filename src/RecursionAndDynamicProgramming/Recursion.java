@@ -1,5 +1,9 @@
 package RecursionAndDynamicProgramming;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+
 public class Recursion {
 
     /*
@@ -33,4 +37,24 @@ public class Recursion {
     TC: O(n!) | Since we have to calculate all permutation we will have to calculate n! perms
     SC: O(n! n) | Store n! results with a max call stack of n
      */
+    public List<List<Integer>> getPermutations(int[] arr) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        getPermutationsHelper(new HashSet<>(), new ArrayList<>(), res, arr);
+    }
+
+    private void getPermutationsHelper(HashSet<Integer> set, ArrayList<Integer> curr,
+                                       ArrayList<ArrayList<Integer>> res, int[] arr) {
+        if (curr.size() == arr.length) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        for (int i=0; i<arr.length; i++) {
+            if (set.contains(arr[i])) continue;
+            set.add(arr[i]);
+            curr.add(arr[i]);
+            getPermutationsHelper(set,curr,res,arr);
+            set.remove(arr[i]);
+            curr.remove(arr[i]);
+        }
+    }
 }
