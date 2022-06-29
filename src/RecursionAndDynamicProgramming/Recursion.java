@@ -25,4 +25,12 @@ public class Recursion {
                 halfProd + halfProd : //if even
                 halfProd + halfProd + bigger; //if odd
     }
+
+    /*
+    8.7 Permutations without dupes
+    pg. 135
+    Get all the permutation of an array of ints
+    TC: O(n!) | Since we have to calculate all permutation we will have to calculate n! perms
+    SC: O(n! n) | Store n! results with a max call stack of n
+     */
 }
