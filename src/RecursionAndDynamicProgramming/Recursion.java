@@ -3,6 +3,7 @@ package RecursionAndDynamicProgramming;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.RandomAccess;
 
 public class Recursion {
 
@@ -37,9 +38,10 @@ public class Recursion {
     TC: O(n!) | Since we have to calculate all permutation we will have to calculate n! perms
     SC: O(n! n) | Store n! results with a max call stack of n
      */
-    public List<List<Integer>> getPermutations(int[] arr) {
+    public ArrayList<ArrayList<Integer>> getPermutations(int[] arr) {
         ArrayList<ArrayList<Integer>> res = new ArrayList<>();
         getPermutationsHelper(new HashSet<>(), new ArrayList<>(), res, arr);
+        return res;
     }
 
     private void getPermutationsHelper(HashSet<Integer> set, ArrayList<Integer> curr,
@@ -57,4 +59,13 @@ public class Recursion {
             curr.remove(arr[i]);
         }
     }
+
+    /*
+    8.8 Permutations with dupes
+    pg. 135
+    Get all the permutation of an array of ints when there are dupes
+    TC: O(n!) | Since we have to calculate all permutation we will have to calculate n! perms
+    SC: O(n! n) | Store n! results with a max call stack of n
+     */
+
 }
