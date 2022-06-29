@@ -67,5 +67,25 @@ public class Recursion {
     TC: O(n!) | Since we have to calculate all permutation we will have to calculate n! perms
     SC: O(n! n) | Store n! results with a max call stack of n
      */
+    public ArrayList<ArrayList<Integer>> getPermutationsDupes(int[] arr) {
+        ArrayList<ArrayList<Integer>> res = new ArrayList<>();
+        getPermutationsHelperDupes(new boolean[arr.length], new ArrayList<>(), res, arr);
+        return res;
+    }
 
+    private void getPermutationsHelperDupes(boolean[] visited, ArrayList<Integer> curr,
+                                       ArrayList<ArrayList<Integer>> res, int[] arr) {
+        if (curr.size() == arr.length) {
+            res.add(new ArrayList<>(curr));
+            return;
+        }
+        for (int i=0; i <arr.length; i++) {
+            if (visited[i] || i > 0 && arr[i-1] == arr[i] && !visited[i-1]) continue;
+            curr.add(arr[i]);
+            visited[i] = true;
+            getPermutationsHelperDupes(visited,curr,res,arr);
+            visited[i] = false;
+            curr.remove(arr[i]);
+        }
+    }
 }
