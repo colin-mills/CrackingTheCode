@@ -117,4 +117,13 @@ public class Recursion {
             curr.deleteCharAt(curr.length()-1);
         }
     }
+
+    /*
+    8.12 Eight Queens
+    pg. 136
+    Get all the valid solutions for placing 8 queens on the board
+    TC: technically constant since there is no variable n that is changing
+    SC: technically constant since there is no variable n that is changing
+     */
+
 }
