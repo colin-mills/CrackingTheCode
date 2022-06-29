@@ -1,5 +1,7 @@
 package RecursionAndDynamicProgramming;
 
+import java.util.List;
+
 public class DynamicProgramming {
     public static void main (String[] args) {
         for (int i = 0; i <= 100; i++) {
@@ -36,4 +38,40 @@ public class DynamicProgramming {
     TC: O(r * c) | where r = number of rows, c = number of columns
     SC: O(r * c) | memo grid, can optimize to O(c) if you are clever with array mangaement
      */
+    public int traverseGrid(int r, int c, List<int[]> offLimits) {
+        int[][] board = new int[r][c];
+        intitializeBoard(board, offLimits);
+        for (int row = 1; row < board.length; row++) {
+            for (int col = 1; col < board[row].length; col++) {
+                if (isValidSpace(row,col,board))
+                    board[row][col] = combinePaths(row,col,board);
+            }
+        }
+        return board[r-1][c-1];
+    }
+
+    private boolean isValidSpace(int row, int col, int[][] board) {
+        if (row < 0 || row >= board.length
+                || col < 0 || col >= board[row].length
+                || board[row][col] == -1)
+            return false;
+
+        return true;
+    }
+
+    private int combinePaths(int row, int col, int[][] board) {
+        int numPaths = 0;
+        if (isValidSpace(row-1,col,board)) numPaths += board[row-1][col];
+        if (isValidSpace(row,col-1,board)) numPaths += board[row][col-1];
+
+        return numPaths;
+    }
+
+    private void intitializeBoard(int[][] board, List<int[]> offLimits) {
+        //the first row and column only have one path
+        for (int r = 0; r < board.length; r++) board[r][0] = 1;
+        for (int c = 0; c < board.length; c++) board[0][c] = 1;
+
+        for (int[] coord : offLimits) board[coord[0]][coord[1]] = -1;
+    }
 }
