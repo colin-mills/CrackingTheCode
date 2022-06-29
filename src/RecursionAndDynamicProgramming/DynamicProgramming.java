@@ -5,9 +5,15 @@ import java.util.List;
 
 public class DynamicProgramming {
     public static void main (String[] args) {
+        /*
         for (int i = 0; i <= 100; i++) {
             System.out.println("triple step of " + i + ": " + tripleStep(i));
         }
+         */
+        System.out.println("Number of subsets of {1,2,3}: " + getSubsets(new int[] {1,2,3}).size());
+        System.out.println("Number of subsets of {1,2,3,4}: " + getSubsets(new int[] {1,2,3,4}).size());
+        System.out.println("Number of subsets of {1,2,3,4}: " + getSubsets(new int[] {1,2,3,4,10,50,100,999,7280}).size());
+
     }
 
     /*
@@ -134,12 +140,12 @@ public class DynamicProgramming {
     }
 
     private static void getSubsets(int start, int[] arr, List<Integer> current, List<List<Integer>> res) {
-        if (start >= arr.length) return;
+        //if (start >= arr.length) return;
         //deep copy
         res.add(new ArrayList<>(current));
         for (int i = start; i < arr.length; i++) {
             current.add(arr[i]);
-            getSubsets(i,arr,current,res);
+            getSubsets(i+1,arr,current,res);
             current.remove(current.size()-1);
         }
 
